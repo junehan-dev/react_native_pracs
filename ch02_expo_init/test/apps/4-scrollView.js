@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
@@ -7,6 +7,7 @@ export default function App() {
 		//이 속성은 파일 최하단에 작성한 스타일 코드 객체의 키 값을 부여해
     // 엘리먼트들에 스타일을 줄 수 있습니다.
     //이는 JSX문법을 배우고 난 다음 더 자세히 다룹니다.
+
     <ScrollView style = {styles.container}>
     <View style={styles.container}>
 			{/* //보인 영역을 갖는 엘리먼트 7가 반복적으로 쓰였습니다. */}

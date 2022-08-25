@@ -1,3 +1,28 @@
+CH02 Basic To React-native and Expo
+-----------------------------------
+
+Basic Components
+^^^^^^^^^^^^^^^^
+
+- View
+   UI 구성 기초 요소
+
+- Text
+   Text UI 요소
+
+- Image
+   Image UI 요소
+
+- TextInput
+   키보드 입력을 통해 텍스트를 앱으로 전달하는 UI 요소
+
+- ScrollView
+   다수의 요소와 Views 중계할 수 있는 스크롤링 컨테이너
+
+- StyleSheet
+   CSS 같은 추상 레이어
+
+
 CH01 Basic Javascript
 ---------------------
 
