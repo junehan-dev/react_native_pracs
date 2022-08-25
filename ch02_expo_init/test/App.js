@@ -2,6 +2,10 @@ import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { StyleSheet, Text, View, LogBox } from "react-native";
 
+const main = {
+  description: "To share a photo from your phone with a friend, just press the button below!"
+};
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -10,7 +14,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textStyle: {
-	color: "white",
+  	color: "white",
+    
   },
 });
 
@@ -35,7 +40,7 @@ export default function App() {
  
   return (
     <View style={styles.container}>
-      <Text style={styles.textStyle}>Open up App.js to start working on your App!</Text>
+      <Text style={styles.textStyle}>{main.description}</Text>
       <StatusBar style="dark" />
     </View>
   );
