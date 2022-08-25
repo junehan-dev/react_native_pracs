@@ -22,6 +22,13 @@ Basic Components
 - StyleSheet
    CSS 같은 추상 레이어
 
+Additionals
+^^^^^^^^^^^
+
+- Button VS TouchableOpacity
+
+   | Button 태그는 버튼자체로 그래픽요소이기 때문에 button의 기본 스타일에 대한 처리를 필요로 한다. 자유도가 적다.(Image를 버튼으로 사용한다거나)
+   | TouchableOpacity는 내부 영역을 button과 같은 속성으로 처리할 수 있도록 도와주는 helper container. (a태그 같은)
 
 CH01 Basic Javascript
 ---------------------
