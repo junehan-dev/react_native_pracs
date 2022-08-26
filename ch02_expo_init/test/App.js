@@ -1,6 +1,4 @@
-import React from 'react';
-import imageApp from "./apps/6-Image"
-
+import app from "./apps/8-mainTest";
 export default function App() {
-  return imageApp();
-}
+  return app();
+};
