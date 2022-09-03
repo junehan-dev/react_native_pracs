@@ -1,24 +1,46 @@
-import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native'
+import {React, useState, useEffect} from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert} from 'react-native'
+import Loading from "../components/loading"
 import Card from "../components/card"
+
 const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/main.png'
 import data from '../data.json';
 
+
+
 export default function MainPage() {
-	let tip = data.tip;
+	const [state, setState] = useState({});
+	const [ready, setReady] = useState(true);
+
+	useEffect(() => {
+				//setState(data);
+				setReady(false);
+			setTimeout(() => {
+				setState(data);
+			//	setReady(false);
+			}, 1000);
+		}, []
+	);
+
+	
+	let tip = state.tip;
 	let todayWeather = 10 + 17;
 	let todayCondition = "흐림"
 
-	return (
+	function filterCategory(cate) {
+		setState({tip: data.tip.filter((tip => tip.category === cate))});
+	}
+
+	return state.tip === undefined ? <Loading/> : (
 		<ScrollView style={styles.container}>
 			<Text style={styles.title}>나만의 꿀팁</Text>
 			<Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
 			<Image style={styles.mainImage} source={{uri:main}}/>
 			<ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
-				<TouchableOpacity style={styles.middleButton01}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
-				<TouchableOpacity style={styles.middleButton02}><Text style={styles.middleButtonText}>재테크</Text></TouchableOpacity>
-				<TouchableOpacity style={styles.middleButton03}><Text style={styles.middleButtonText}>반려견</Text></TouchableOpacity>
-				<TouchableOpacity style={styles.middleButton04}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
+				<TouchableOpacity style={styles.middleButton01} onPress={()=> filterCategory("생활")}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
+				<TouchableOpacity style={styles.middleButton02} onPress={()=> filterCategory("재태크")}><Text style={styles.middleButtonText}>재테크</Text></TouchableOpacity>
+				<TouchableOpacity style={styles.middleButton03} onPress={()=> filterCategory("반려견")}><Text style={styles.middleButtonText}>반려견</Text></TouchableOpacity>
+				<TouchableOpacity style={styles.middleButton04} onPress={()=> filterCategory("꿀팁 찜")}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
 			</ScrollView>
 			<View style={styles.cardContainer}>
 				{ 
