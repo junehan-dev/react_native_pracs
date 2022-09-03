@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 
 const styles = StyleSheet.create({
 	card:{
@@ -33,15 +33,15 @@ const styles = StyleSheet.create({
 		color:"#A6A6A6",
 	}
 });
-export default function Card({content}) {
+export default function Card({content, navigation}) {
 	return (
-		<View style={styles.card}>
+		<TouchableOpacity style={styles.card} onPress={() => navigation.navigate("AboutPage", content)}>
 			<Image style={styles.cardImage} source={{uri:content.image}}/>
 			<View style={styles.cardText}>
 				<Text style={styles.cardTitle} numberOfLines={1}>{content.title}</Text>
 				<Text style={styles.cardDesc} numberOfLines={3}>{content.desc}</Text>
 				<Text style={styles.cardDate}>{content.date}</Text>
 			</View>
-		</View>)
+		</TouchableOpacity>)
 }
 

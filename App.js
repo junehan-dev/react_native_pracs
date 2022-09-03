@@ -4,7 +4,6 @@ import MainPage from "./pages/main"
 import AboutPage from "./pages/about"
 import StackNavigator from "./navigation/stackNavigator"
 
-
 export default function App() {
 	console.disableYellowBox = true;
 

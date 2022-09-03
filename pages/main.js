@@ -6,7 +6,7 @@ import data from '../data.json';
 
 const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/main.png'
 
-export default function MainPage() {
+export default function MainPage({navigation, route}) {
 	const [state, setState] = useState({});
 	const [ready, setReady] = useState(true);
 
@@ -42,7 +42,7 @@ export default function MainPage() {
 			</ScrollView>
 			<View style={styles.cardContainer}>
 				{ 
-					tip.map((content, i) => (<Card content={content} key={i}/>))
+					tip.map((content, i) => (<Card content={content} key={i} navigation={navigation}/>))
 				}
 			</View>
 		</ScrollView>);
