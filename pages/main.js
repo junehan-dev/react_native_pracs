@@ -1,6 +1,5 @@
 import {React, useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert} from 'react-native'
-import { StatusBar } from "expo-status-bar"
 import Loading from "../components/loading"
 import Card from "../components/card"
 import data from '../data.json';
@@ -32,8 +31,7 @@ export default function MainPage() {
 
 	return state.tip === undefined ? <Loading/> : (
 		<ScrollView style={styles.container}>
-			<StatusBar style="light"/>
-			<Text style={styles.title}>나만의 꿀팁</Text>
+			{/*<Text style={styles.title}>나만의 꿀팁</Text>*/}
 			<Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
 			<Image style={styles.mainImage} source={{uri:main}}/>
 			<ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
