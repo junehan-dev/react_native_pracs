@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native';
-
+import React from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView} from 'react-native'
+import Card from "../components/card"
 const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/main.png'
 import data from '../data.json';
 
@@ -22,16 +22,7 @@ export default function MainPage() {
 			</ScrollView>
 			<View style={styles.cardContainer}>
 				{ 
-					tip.map((content,i)=>{
-						return (<View style={styles.card} key={i}>
-						<Image style={styles.cardImage} source={{uri:content.image}}/>
-						<View style={styles.cardText}>
-						<Text style={styles.cardTitle} numberOfLines={1}>{content.title}</Text>
-						<Text style={styles.cardDesc} numberOfLines={3}>{content.desc}</Text>
-						<Text style={styles.cardDate}>{content.date}</Text>
-						</View>
-						</View>)
-					})
+					tip.map((content, i) => (<Card content={content} key={i}/>))
 				}
 			</View>
 		</ScrollView>);
