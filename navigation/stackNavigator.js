@@ -3,6 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack"
 import AboutPage from "../pages/about"
 import MainPage from "../pages/main"
 import IntroPage from "../pages/intro"
+import LikePage from "../pages/like"
 
 const Stack = createStackNavigator();
 const navigatorStyle = {
@@ -22,6 +23,7 @@ const StackNavigator = () => {
 			<Stack.Screen name="MainPage" component={MainPage}/>
 			<Stack.Screen name="AboutPage" component={AboutPage}/>
 			<Stack.Screen name="IntroPage" component={IntroPage}/>
+			<Stack.Screen name="LikePage" component={LikePage}/>
 		</Stack.Navigator>
 	);
 };

@@ -42,7 +42,7 @@ export default function MainPage({navigation, route}) {
 				<TouchableOpacity style={styles.middleButton01} onPress={()=> filterCategory("생활")}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
 				<TouchableOpacity style={styles.middleButton02} onPress={()=> filterCategory("재태크")}><Text style={styles.middleButtonText}>재테크</Text></TouchableOpacity>
 				<TouchableOpacity style={styles.middleButton03} onPress={()=> filterCategory("반려견")}><Text style={styles.middleButtonText}>반려견</Text></TouchableOpacity>
-				<TouchableOpacity style={styles.middleButton04} onPress={()=> filterCategory("꿀팁 찜")}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
+				<TouchableOpacity style={styles.middleButton04} onPress={()=> navigation.navigate("LikePage")}><Text style={styles.middleButtonText}>꿀팁 찜</Text></TouchableOpacity>
 			</ScrollView>
 			<View style={styles.cardContainer}>
 				{ 
