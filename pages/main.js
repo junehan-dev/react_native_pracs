@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert} from 'react-native'
+import * as Location from "expo-location";
 import Loading from "../components/loading"
 import Card from "../components/card"
 import data from '../data.json';
@@ -9,18 +10,6 @@ const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/ma
 export default function MainPage({navigation, route}) {
 	const [state, setState] = useState({});
 	const [ready, setReady] = useState(true);
-
-	useEffect(() => {
-				//setState(data);
-				setReady(false);
-			setTimeout(() => {
-				setState(data);
-			//	setReady(false);
-			}, 1000);
-		}, []
-	);
-
-	
 	let tip = state.tip;
 	let todayWeather = 10 + 17;
 	let todayCondition = "흐림"
@@ -28,6 +17,27 @@ export default function MainPage({navigation, route}) {
 	function filterCategory(cate) {
 		setState({tip: data.tip.filter((tip => tip.category === cate))});
 	}
+
+	async function getLocation (){
+		try {
+			await Location.requestForegroundPermissionAsync();
+			const data = await Location.getCurrentPositionAsync();
+			console.log(data);
+		} catch (err) {
+			Alert.alert("unable to find the location", "reboot the app");
+		}
+	}
+
+	useEffect(() => {
+			setTimeout(() => {
+				getLocation();
+				setState(data);
+				setReady(false);
+			}, 1000);
+		}, []
+	);
+
+
 
 	return state.tip === undefined ? <Loading/> : (
 		<ScrollView style={styles.container}>
