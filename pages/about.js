@@ -1,6 +1,6 @@
 import {React, useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert, Share } from 'react-native';
-
+import * as Linking from "expo-linking";
 
 const popup = () => Alert.alert("POPUP nomsg");
 
@@ -15,6 +15,7 @@ export default function AboutPage({navigation, route}) {
 				"date":"2020.09.09"
 	});
 	const share = () => Share.share({message: `${tip.title}\n\n${tip.desc}\n=n${tip.image}`});
+	const link = () => Linking.openURL("https://google.com");
 
 	useEffect(() => {
 		console.log(route);
@@ -42,6 +43,9 @@ export default function AboutPage({navigation, route}) {
 				</TouchableOpacity>
 				<TouchableOpacity onPress={share}>
 					<Text style={styles.mybutton}>Share!</Text>
+				</TouchableOpacity>
+				<TouchableOpacity onPress={link}>
+					<Text style={styles.mybutton}>Link!</Text>
 				</TouchableOpacity>
 			</View>
 		</ScrollView>);
