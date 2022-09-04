@@ -32,8 +32,12 @@ export default function MainPage({navigation, route}) {
 	return state.tip === undefined ? <Loading/> : (
 		<ScrollView style={styles.container}>
 			{/*<Text style={styles.title}>나만의 꿀팁</Text>*/}
+			<TouchableOpacity style={styles.introButton} onPress={()=>navigation.navigate('IntroPage')}>
+				<Text style={styles.introButtonText}>소개 페이지</Text>
+			</TouchableOpacity>
 			<Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
 			<Image style={styles.mainImage} source={{uri:main}}/>
+
 			<ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
 				<TouchableOpacity style={styles.middleButton01} onPress={()=> filterCategory("생활")}><Text style={styles.middleButtonText}>생활</Text></TouchableOpacity>
 				<TouchableOpacity style={styles.middleButton02} onPress={()=> filterCategory("재태크")}><Text style={styles.middleButtonText}>재테크</Text></TouchableOpacity>
@@ -61,6 +65,21 @@ const styles = StyleSheet.create({
 	weather:{
 		alignSelf:"flex-end",
 		paddingRight:20
+	},
+	introButtonText: {
+		color:"black",
+		fontWeight:"700",
+		fontSize: 12,
+		textAlign:"center"
+	},
+	introButton: {
+		width:90,
+		height:44,
+		padding:15,
+		backgroundColor:"#aaa",
+		borderRadius:15,
+		margin:7,
+		alignSelf: "flex-end",
 	},
 	mainImage: {
 		width:'90%',

@@ -2,6 +2,7 @@ import React from "react"
 import { createStackNavigator } from "@react-navigation/stack"
 import AboutPage from "../pages/about"
 import MainPage from "../pages/main"
+import IntroPage from "../pages/intro"
 
 const Stack = createStackNavigator();
 const navigatorStyle = {
@@ -20,6 +21,7 @@ const StackNavigator = () => {
 		<Stack.Navigator screenOptions={navigatorStyle}>
 			<Stack.Screen name="MainPage" component={MainPage}/>
 			<Stack.Screen name="AboutPage" component={AboutPage}/>
+			<Stack.Screen name="IntroPage" component={IntroPage}/>
 		</Stack.Navigator>
 	);
 };
