@@ -10,8 +10,10 @@ const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/ma
 
 export default function MainPage({navigation, route}) {
 	const [state, setState] = useState({});
-	const [loc, setlocState] = useState({});
-	const [ready, setReady] = useState(true);
+	const [loc, setLocation] = useState({});
+	const [weather, setWeather] = useState({});
+	const [isReady, ready]  = useState(false);
+
 	let tip = state.tip;
 	let todayWeather = 10 + 17;
 	let todayCondition = "흐림"
@@ -23,10 +25,23 @@ export default function MainPage({navigation, route}) {
 	async function getLocation (){
 		try {
 			await Location.requestForegroundPermissionsAsync();
-			const data = await Location.getCurrentPositionAsync();
-			setlocState(data);
+			let data = await Location.getCurrentPositionAsync();
+		
+			const {latitude, longitude} = data["coords"];
+			if (!latitude || !longitude)
+				throw new Error();
+			setLocation({latitude, longitude});
+			const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
+			data = await axios.get(
+				`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+			);
+			const { temp } = data["data"]["main"];
+			const weatherState = data["data"]["weather"][0]["main"];
+			setWeather({temp, state: weatherState});
+			console.log(weather);
 			return (true);
 		} catch (err) {
+			console.log("ERROR", err);
 			Alert.alert("unable to find the location", "reboot the app");
 			return (false);
 		}
@@ -35,32 +50,24 @@ export default function MainPage({navigation, route}) {
 	useEffect(() => {
 			const prom = new Promise((resolve, reject) => {
 				setState(data);
-				setReady(false);
 				(state) ? resolve() : reject();
 			}).then(async () => {
 				await getLocation() ? Promise.resolve() : Promise.reject();
-			}).then(async () =>{
-				console.log(loc["coords"]);
-				const {latitude, longitude} = loc["coords"];
-				console.log({latitude, longitude});
-				const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
-				const result = await axios.get(
-					`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
-				);
-				console.log(result);
-			})
+			}).then(() =>{
+				ready(true);
+			});
 		}, []
 	);
 
 
 
-	return state.tip === undefined ? <Loading/> : (
+	return (isReady === false) ? <Loading/> : (
 		<ScrollView style={styles.container}>
 			{/*<Text style={styles.title}>나만의 꿀팁</Text>*/}
 			<TouchableOpacity style={styles.introButton} onPress={()=>navigation.navigate('IntroPage')}>
 				<Text style={styles.introButtonText}>소개 페이지</Text>
 			</TouchableOpacity>
-			<Text style={styles.weather}>오늘의 날씨: {todayWeather + '°C ' + todayCondition} </Text>
+			<Text style={styles.weather}>오늘의 날씨: {(weather["temp"] || '0') + '°C ' + (weather["state"] || "모름")} </Text>
 			<Image style={styles.mainImage} source={{uri:main}}/>
 
 			<ScrollView style={styles.middleContainer} horizontal indicatorStyle={"white"}>
