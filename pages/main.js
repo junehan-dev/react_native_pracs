@@ -1,14 +1,16 @@
 import {React, useState, useEffect} from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert} from 'react-native'
-import * as Location from "expo-location";
+import * as Location from "expo-location"
+import axios from "axios"
 import Loading from "../components/loading"
 import Card from "../components/card"
-import data from '../data.json';
+import data from '../data.json'
 
 const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/main.png'
 
 export default function MainPage({navigation, route}) {
 	const [state, setState] = useState({});
+	const [loc, setlocState] = useState({});
 	const [ready, setReady] = useState(true);
 	let tip = state.tip;
 	let todayWeather = 10 + 17;
@@ -20,20 +22,33 @@ export default function MainPage({navigation, route}) {
 
 	async function getLocation (){
 		try {
-			await Location.requestForegroundPermissionAsync();
+			await Location.requestForegroundPermissionsAsync();
 			const data = await Location.getCurrentPositionAsync();
-			console.log(data);
+			setlocState(data);
+			return (true);
 		} catch (err) {
 			Alert.alert("unable to find the location", "reboot the app");
+			return (false);
 		}
 	}
 
 	useEffect(() => {
-			setTimeout(() => {
-				getLocation();
+			const prom = new Promise((resolve, reject) => {
 				setState(data);
 				setReady(false);
-			}, 1000);
+				(state) ? resolve() : reject();
+			}).then(async () => {
+				await getLocation() ? Promise.resolve() : Promise.reject();
+			}).then(async () =>{
+				console.log(loc["coords"]);
+				const {latitude, longitude} = loc["coords"];
+				console.log({latitude, longitude});
+				const API_KEY = "cfc258c75e1da2149c33daffd07a911d";
+				const result = await axios.get(
+					`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}&units=metric`
+				);
+				console.log(result);
+			})
 		}, []
 	);
 
