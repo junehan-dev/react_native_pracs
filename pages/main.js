@@ -5,6 +5,7 @@ import axios from "axios"
 import Loading from "../components/loading"
 import Card from "../components/card"
 import data from '../data.json'
+//import { firebase_db } from "../firebaseConfig"
 
 const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/main.png'
 
@@ -47,11 +48,17 @@ export default function MainPage({navigation, route}) {
 		}
 	}
 
+
 	useEffect(() => {
 			const prom = new Promise((resolve, reject) => {
-				setState(data);
-				(state) ? resolve() : reject();
-			}).then(async () => {
+				//firebase_db.ref("/tip").once("value").then((snapshot) => {
+				//	console.log("loaded");
+			//		setState(snapshot.val());
+					setState(data);
+					console.log("hi");
+					resolve();
+				}).then(async () => {
+				console.log("LOC!");
 				await getLocation() ? Promise.resolve() : Promise.reject();
 			}).then(() =>{
 				ready(true);
