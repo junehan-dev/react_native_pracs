@@ -18,35 +18,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "iosTest"
+      "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.junehan.react_pracs",
-	  "permissions" : [
-	    "READ_EXTERNAL_STORAGE",
-	    "READ_INTERNAL_STORAGE",
-	    "CAMERA",
-	    "WRITE_EXTERNAL_STORAGE"
-	  ],
-	  "versionCode": 1
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "7324494a-9e55-483f-af80-ec53e6e7115c"
-      }
-    },
-	"description": ""
-  },
-  "react-native-google-mobile-ads": {
-    "android_app_id": "ca-app-pub-8920440571410077/3282740785",
-    "ios_app_id": "ca-app-pub-8920440571410077/9542657689"
+    }
   }
 }

@@ -1,15 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert } from 'react-native'
+import {React, useState, useEffect} from 'react'
+import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView, Alert} from 'react-native'
 import * as Location from "expo-location"
 import axios from "axios"
-
-import {ref, onValue} from "firebase/database"
-import database from "../firebaseConn"
-
 import Loading from "../components/loading"
 import Card from "../components/card"
 import data from '../data.json'
-
+//import { firebase_db } from "../firebaseConfig"
 
 const main = 'https://storage.googleapis.com/sparta-image.appspot.com/lecture/main.png'
 
@@ -19,6 +15,7 @@ export default function MainPage({navigation, route}) {
 	const [weather, setWeather] = useState({});
 	const [isReady, ready]  = useState(false);
 
+	let tip = state.tip;
 	let todayWeather = 10 + 17;
 	let todayCondition = "흐림"
 
@@ -51,15 +48,17 @@ export default function MainPage({navigation, route}) {
 		}
 	}
 
+
 	useEffect(() => {
 			const prom = new Promise((resolve, reject) => {
-				const tipRef = ref(database, "tip/");
-				onValue(tipRef, (snapshot) => {
-					const val = snapshot.val();
-					setState(val);
+				//firebase_db.ref("/tip").once("value").then((snapshot) => {
+				//	console.log("loaded");
+			//		setState(snapshot.val());
+					setState(data);
+					console.log("hi");
 					resolve();
-				});
-			}).then(async () => {
+				}).then(async () => {
+				console.log("LOC!");
 				await getLocation() ? Promise.resolve() : Promise.reject();
 			}).then(() =>{
 				ready(true);
@@ -86,7 +85,7 @@ export default function MainPage({navigation, route}) {
 			</ScrollView>
 			<View style={styles.cardContainer}>
 				{ 
-					state.map((content, i) => (<Card content={content} key={i} navigation={navigation}/>))
+					tip.map((content, i) => (<Card content={content} key={i} navigation={navigation}/>))
 				}
 			</View>
 		</ScrollView>);
