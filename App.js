@@ -1,5 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native"
 import { StatusBar } from "expo-status-bar"
+import React from "react";
 import MainPage from "./pages/main"
 import AboutPage from "./pages/about"
 import StackNavigator from "./navigation/stackNavigator"
@@ -12,8 +13,6 @@ export default function App() {
 			<StatusBar style = "black"/>
 			<StackNavigator/>
 		</NavigationContainer>
-	// <MainPage/>
-	// <AboutPage/>
 	);
 }
 
